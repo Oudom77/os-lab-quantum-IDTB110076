@@ -1,0 +1,19 @@
+#!/bin/bash
+
+read -r -p "Enter the drop zone folder name: " folder_name
+
+if [ -z "$folder_name" ]; then
+    echo "Error: Folder name cannot be empty."
+    exit 1
+fi
+
+dropzone_path="$HOME/$folder_name"
+
+mkdir -p "$dropzone_path"
+
+chmod o+wx "$dropzone_path"
+chmod +t "$dropzone_path"
+
+echo "Drop zone created successfully."
+echo "Path: $dropzone_path"
+ls -ld "$dropzone_path"

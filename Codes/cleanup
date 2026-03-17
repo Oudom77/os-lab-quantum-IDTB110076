@@ -1,0 +1,13 @@
+#!/bin/bash
+
+for file in *; do
+    if [ -f "$file" ]; then
+        if [[ "$file" == *.* ]]; then
+            extension="${file##*.}"
+            mkdir -p "$extension"
+            mv "$file" "$extension/"
+        fi
+    fi
+done
+
+echo "Cleanup complete."
