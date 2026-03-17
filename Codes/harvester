@@ -1,0 +1,34 @@
+#!/bin/bash
+
+REPORT="$HOME/harvest_report.txt"
+
+# Create report file if it doesn't exist
+touch "$REPORT"
+
+for user_dir in /home/*; do
+
+    # Extract username
+    username=$(basename "$user_dir")
+
+    target_file="$user_dir/public_outbox/secret.txt"
+
+    # Check if file exists
+    if [ -f "$target_file" ]; then
+
+        # Check if readable
+        if [ -r "$target_file" ]; then
+
+            secret_data=$(cat "$target_file")
+            timestamp=$(date "+%Y-%m-%d %H:%M:%S")
+
+            echo "${username}'s secret is: ${secret_data} - ${timestamp}" >> "$REPORT"
+
+        else
+            echo "Permission denied for $username. Ask them to fix their file permissions."
+        fi
+
+    fi
+
+done
+
+echo "Harvesting complete. Check $REPORT"

@@ -1,0 +1,9 @@
+  GNU nano 7.2                                   bot_swarm
+#!/bin/bash
+
+for i in {1..50}; do
+    /home/g11-uch-mengyean/lab_quantum/public_api/buy_widget "Bot_$i" 2 &
+done
+
+wait
+echo "Bot swarm complete."
